@@ -51,6 +51,7 @@ const cartItems = document.getElementById("cart-items");
 const totalElement = document.getElementById("total");
 
 // Display products
+
 function displayProducts(items = products) {
   productList.innerHTML = "";
 
@@ -75,6 +76,38 @@ function displayProducts(items = products) {
     productList.appendChild(card);
   });
 }
+
+function filterProducts() {
+  const searchText = document
+    .getElementById("search-input")
+    .value.toLowerCase().trim();
+
+  const selectedCategory = document
+    .getElementById("category-filter")
+    .value;
+
+  const filteredProducts = products.filter(product => {
+    const matchesSearch =
+      product.name.toLowerCase().includes(searchText);
+
+    const matchesCategory =
+      selectedCategory === "All" ||
+      product.category === selectedCategory;
+
+    return matchesSearch && matchesCategory;
+  });
+
+  displayProducts(filteredProducts);
+}
+
+document
+  .getElementById("search-input")
+  .addEventListener("input", filterProducts);
+
+document
+  .getElementById("category-filter")
+  .addEventListener("change", filterProducts);
+
 
 // Add product to cart
 function addToCart(id) {
