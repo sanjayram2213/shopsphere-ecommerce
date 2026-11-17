@@ -190,3 +190,31 @@ footer {
 .shop-controls select:focus {
   outline: 2px solid #2563eb;
 }
+
+#checkout {
+  background: white;
+  margin: 20px 5%;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+}
+
+#checkout h2,
+#checkout h3 {
+  margin-bottom: 18px;
+}
+
+#checkout-summary p {
+  padding: 10px 0;
+  border-bottom: 1px solid #eee;
+}
+
+#checkout button {
+  margin: 12px 8px 0 0;
+}
+
+#order-message {
+  color: green;
+  font-weight: bold;
+  margin-top: 15px;
+}
