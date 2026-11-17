@@ -85,6 +85,52 @@ card.innerHTML = `
   });
 }
 
+// Add product to wishlist
+function addToWishlist(id) {
+  const product = products.find(item => item.id === id);
+
+  const alreadyAdded = wishlist.some(item => item.id === id);
+
+  if (!alreadyAdded && product) {
+    wishlist.push(product);
+    displayWishlist();
+    alert("Added to Wishlist!");
+  } else {
+    alert("Already in Wishlist!");
+  }
+}
+
+// Display wishlist
+function displayWishlist() {
+  wishlistItems.innerHTML = "";
+
+  if (wishlist.length === 0) {
+    wishlistItems.textContent = "Your wishlist is empty.";
+    return;
+  }
+
+  wishlist.forEach(item => {
+    const row = document.createElement("div");
+
+    row.innerHTML = `
+      <p>
+        ${item.name} - ₹${item.price}
+        <button onclick="removeFromWishlist(${item.id})">
+          Remove
+        </button>
+      </p>
+    `;
+
+    wishlistItems.appendChild(row);
+  });
+}
+
+// Remove from wishlist
+function removeFromWishlist(id) {
+  wishlist = wishlist.filter(item => item.id !== id);
+  displayWishlist();
+}
+
 function filterProducts() {
   const searchText = document
     .getElementById("search-input")
