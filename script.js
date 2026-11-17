@@ -205,7 +205,10 @@ function updateCart() {
   }
 
   let total = 0;
-
+  cartCount.textContent = cart.reduce(
+  (sum, item) => sum + item.quantity,
+  0
+);
   cart.forEach(item => {
     const itemTotal = item.price * item.quantity;
     total += itemTotal;
