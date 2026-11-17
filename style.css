@@ -160,3 +160,33 @@ footer {
     height: 125px;
   }
 }
+
+.shop-controls {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 25px;
+  flex-wrap: wrap;
+}
+
+.shop-controls input,
+.shop-controls select {
+  padding: 13px;
+  border: 1px solid #ddd;
+  border-radius: 7px;
+  font-size: 15px;
+  background: white;
+}
+
+.shop-controls input {
+  flex: 1;
+  min-width: 180px;
+}
+
+.shop-controls select {
+  min-width: 150px;
+}
+
+.shop-controls input:focus,
+.shop-controls select:focus {
+  outline: 2px solid #2563eb;
+}
