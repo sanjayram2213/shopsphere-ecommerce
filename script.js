@@ -45,11 +45,12 @@ const products = [
 ];
 
 let cart = [];
-
+let wishlist = [];
 const productList = document.getElementById("product-list");
 const cartItems = document.getElementById("cart-items");
 const totalElement = document.getElementById("total");
-
+const cartCount = document.getElementById("cart-count");
+const wishlistItems = document.getElementById("wishlist-items");
 // Display products
 
 function displayProducts(items = products) {
@@ -64,14 +65,21 @@ function displayProducts(items = products) {
     const card = document.createElement("div");
     card.className = "product-card";
 
-    card.innerHTML = `
-      <img src="${product.image}" alt="${product.name}">
-      <h3>${product.name}</h3>
-      <p>₹${product.price.toLocaleString("en-IN")}</p>
-      <button onclick="addToCart(${product.id})">
-        Add to Cart
-      </button>
-    `;
+    
+card.innerHTML = `
+  <img src="${product.image}" alt="${product.name}">
+  <h3>${product.name}</h3>
+  <p>₹${product.price.toLocaleString("en-IN")}</p>
+
+  <button onclick="addToCart(${product.id})">
+    Add to Cart
+  </button>
+
+  <button onclick="addToWishlist(${product.id})">
+    ❤️ Wishlist
+  </button>
+`;
+
 
     productList.appendChild(card);
   });
