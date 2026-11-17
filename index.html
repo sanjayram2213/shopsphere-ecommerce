@@ -55,7 +55,29 @@
     <div id="cart-items">Your cart is empty.</div>
     <h3 id="total">Total: ₹0</h3>
   </section>
+  <button onclick="showCheckout()">
+  Proceed to Checkout
+</button>
+<section id="checkout" hidden>
+  <h2>Checkout</h2>
 
+  <h3>Order Summary</h3>
+  <div id="checkout-summary"></div>
+
+  <h3 id="checkout-total">Total: ₹0</h3>
+
+  <p>Payment method: Demo Order (No real payment)</p>
+
+  <button onclick="placeDemoOrder()">
+    Place Demo Order
+  </button>
+
+  <button onclick="hideCheckout()">
+    Back to Cart
+  </button>
+
+  <p id="order-message"></p>
+</section>
   <footer>
     <p>© 2026 ShopSphere. All rights reserved.</p>
   </footer>
