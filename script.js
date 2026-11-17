@@ -231,6 +231,63 @@ function updateCart() {
     "Total: ₹" + total.toLocaleString("en-IN");
 }
 
+// Open checkout
+function showCheckout() {
+  if (cart.length === 0) {
+    alert("Your shopping cart is empty!");
+    return;
+  }
+
+  const checkout = document.getElementById("checkout");
+  const summary = document.getElementById("checkout-summary");
+
+  let total = 0;
+  summary.innerHTML = "";
+
+  cart.forEach(item => {
+    total += item.price * item.quantity;
+
+    const row = document.createElement("p");
+    row.textContent =
+      item.name + " x " + item.quantity +
+      " = ₹" + (item.price * item.quantity);
+
+    summary.appendChild(row);
+  });
+
+  document.getElementById("checkout-total").textContent =
+    "Total: ₹" + total.toLocaleString("en-IN");
+
+  document.getElementById("order-message").textContent = "";
+
+  checkout.hidden = false;
+  checkout.scrollIntoView({ behavior: "smooth" });
+}
+
+// Return to cart
+function hideCheckout() {
+  document.getElementById("checkout").hidden = true;
+}
+
+// Place demonstration order
+function placeDemoOrder() {
+  if (cart.length === 0) return;
+
+  const orderNumber = "SS" + Date.now().toString().slice(-6);
+
+  document.getElementById("order-message").textContent =
+    "Order placed successfully! Demo Order ID: " + orderNumber;
+
+  cart = [];
+  updateCart();
+
+  displayWishlist();
+
+  alert("Your ShopSphere demo order is successful!");
+
+  document.getElementById("checkout").hidden = true;
+}
+
 // Initial display
 displayProducts();
 updateCart();
