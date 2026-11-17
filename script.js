@@ -235,3 +235,4 @@ function updateCart() {
 // Initial display
 displayProducts();
 updateCart();
+displayWishlist();
