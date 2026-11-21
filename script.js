@@ -222,6 +222,13 @@ function displayProducts(items = products) {
     `;
 
     productList.appendChild(card);
+ const productImage = card.querySelector("img");
+
+productImage.style.cursor = "zoom-in";
+
+productImage.addEventListener("click", () => {
+  openImagePreview(product.image, product.name);
+});
   });
 }
 
