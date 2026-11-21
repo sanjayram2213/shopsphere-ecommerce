@@ -68,3 +68,29 @@ footer { background:#0b1430; color:#dce3f3; text-align:center; padding:28px 18px
   .products { grid-template-columns:1fr; }
   .product-card img { height:190px; }
 }
+
+.product-rating {
+  margin: 5px 0;
+  color: #e5a928;
+  font-size: 16px;
+}
+
+.product-rating small {
+  color: #68738a;
+  font-size: 11px;
+  margin-left: 5px;
+}
+
+.product-description {
+  color: #68738a;
+  font-size: 13px;
+  min-height: 42px;
+  margin: 8px 0;
+}
+
+.product-card .product-price {
+  color: #b17d17;
+  font-size: 19px;
+  font-weight: 800;
+  margin: 10px 0;
+}
