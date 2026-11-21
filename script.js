@@ -112,7 +112,8 @@ const cartCount = document.getElementById("cart-count");
 const wishlistCount = document.getElementById("wishlist-count");
 const wishlistItems = document.getElementById("wishlist-items");
 
-// Display products
+
+// Display professional product cards
 function displayProducts(items = products) {
   productList.innerHTML = "";
 
@@ -121,21 +122,57 @@ function displayProducts(items = products) {
     return;
   }
 
+  const descriptions = {
+    1: "Enjoy clear sound and comfortable listening.",
+    2: "Track your activity and stay connected.",
+    3: "Comfortable shoes for everyday movement.",
+    4: "Carry your essentials wherever you go.",
+    5: "Enjoy your favourite music anywhere.",
+    6: "A stylish accessory for everyday use.",
+    7: "Keep your devices powered while travelling.",
+    8: "A responsive mouse for everyday computing.",
+    9: "Improve your desk setup and laptop comfort.",
+    10: "A comfortable hoodie for casual outfits.",
+    11: "Keep your everyday essentials organised.",
+    12: "A practical bag for trips and travel."
+  };
+
   items.forEach(product => {
     const card = document.createElement("div");
     card.className = "product-card";
 
     card.innerHTML = `
-      <img src="${product.image}" alt="${product.name}">
+      <img src="${product.image}" alt="${product.name}"
+           loading="lazy">
+
       <h3>${product.name}</h3>
-      <p>₹${product.price.toLocaleString("en-IN")}</p>
-      <button onclick="addToCart(${product.id})">Add to Cart</button>
-      <button onclick="addToWishlist(${product.id})">❤️ Wishlist</button>
+
+      <div class="product-rating">
+        <span>★★★★☆</span>
+        <small>Demo rating</small>
+      </div>
+
+      <p class="product-description">
+        ${descriptions[product.id] || "Explore this product at ShopSphere."}
+      </p>
+
+      <p class="product-price">
+        ₹${product.price.toLocaleString("en-IN")}
+      </p>
+
+      <button onclick="addToCart(${product.id})">
+        Add to Cart
+      </button>
+
+      <button onclick="addToWishlist(${product.id})">
+        ❤️ Wishlist
+      </button>
     `;
 
     productList.appendChild(card);
   });
 }
+
 
 // Add to wishlist
 function addToWishlist(id) {
