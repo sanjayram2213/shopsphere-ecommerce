@@ -111,7 +111,23 @@ const totalElement = document.getElementById("total");
 const cartCount = document.getElementById("cart-count");
 const wishlistCount = document.getElementById("wishlist-count");
 const wishlistItems = document.getElementById("wishlist-items");
+// Switch between website views
+function showView(view) {
+  document.getElementById("shop-view").hidden = view !== "shop";
+  document.getElementById("wishlist").hidden = view !== "wishlist";
+  document.getElementById("cart").hidden = view !== "cart";
+  document.getElementById("checkout").hidden = true;
 
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+// Navigation clicks
+document.querySelectorAll("nav a[data-view]").forEach(link => {
+  link.addEventListener("click", event => {
+    event.preventDefault();
+    showView(link.dataset.view);
+  });
+});
 
 // Display professional product cards
 function displayProducts(items = products) {
