@@ -47,7 +47,9 @@ const products = [
     id: 7,
     name: "Power Bank",
     price: 1199,
-    image: "https://images.unsplash.com/photo-1609592806596-b43bada2f2b4?auto=format&fit=crop&w=800&q=80",
+    
+image: "https://images.unsplash.com/photo-1601898532138-9f145a2ad69e?auto=format&fit=crop&w=800&q=80",
+
     category: "Electronics"
   },
   {
