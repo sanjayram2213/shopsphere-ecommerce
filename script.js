@@ -113,6 +113,40 @@ const totalElement = document.getElementById("total");
 const cartCount = document.getElementById("cart-count");
 const wishlistCount = document.getElementById("wishlist-count");
 const wishlistItems = document.getElementById("wishlist-items");
+// Product image preview
+const imagePreview = document.createElement("dialog");
+
+imagePreview.id = "image-preview";
+
+imagePreview.innerHTML = `
+  <button type="button" id="close-preview"
+          aria-label="Close image preview">×</button>
+  <img id="preview-image" src="" alt="">
+  <p id="preview-title"></p>
+`;
+
+document.body.appendChild(imagePreview);
+
+function openImagePreview(src, name) {
+  const previewImage = document.getElementById("preview-image");
+
+  previewImage.src = src;
+  previewImage.alt = name;
+
+  document.getElementById("preview-title").textContent = name;
+
+  imagePreview.showModal();
+}
+
+document.getElementById("close-preview").addEventListener("click", () => {
+  imagePreview.close();
+});
+
+imagePreview.addEventListener("click", event => {
+  if (event.target === imagePreview) {
+    imagePreview.close();
+  }
+});
 // Switch between website views
 function showView(view) {
   document.getElementById("shop-view").hidden = view !== "shop";
