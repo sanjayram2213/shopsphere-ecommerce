@@ -362,13 +362,16 @@ function showCheckout() {
 
   document.getElementById("order-message").textContent = "";
 
+  document.getElementById("cart").hidden = true;
   checkout.hidden = false;
-  checkout.scrollIntoView({ behavior: "smooth" });
+
+  window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
 // Return to cart
 function hideCheckout() {
   document.getElementById("checkout").hidden = true;
+  document.getElementById("cart").hidden = false;
 }
 
 // Demo order
@@ -385,7 +388,7 @@ function placeDemoOrder() {
 
   alert("Your ShopSphere demo order is successful!");
 
-  document.getElementById("checkout").hidden = true;
+  showView("cart");
 }
 
 // Initial display
