@@ -66,6 +66,7 @@ const productList = document.getElementById("product-list");
 const cartItems = document.getElementById("cart-items");
 const totalElement = document.getElementById("total");
 const cartCount = document.getElementById("cart-count");
+const wishlistCount = document.getElementById("wishlist-count");
 const wishlistItems = document.getElementById("wishlist-items");
 
 // Display products
@@ -110,6 +111,7 @@ function addToWishlist(id) {
 
 // Display wishlist
 function displayWishlist() {
+  wishlistCount.textContent = wishlist.length;
   wishlistItems.innerHTML = "";
 
   if (wishlist.length === 0) {
