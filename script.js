@@ -114,18 +114,7 @@ const cartCount = document.getElementById("cart-count");
 const wishlistCount = document.getElementById("wishlist-count");
 const wishlistItems = document.getElementById("wishlist-items");
 // Product image preview
-const imagePreview = document.createElement("dialog");
-
-imagePreview.id = "image-preview";
-
-imagePreview.innerHTML = `
-  <button type="button" id="close-preview"
-          aria-label="Close image preview">×</button>
-  <img id="preview-image" src="" alt="">
-  <p id="preview-title"></p>
-`;
-
-document.body.appendChild(imagePreview);
+const imagePreview = document.getElementById("image-preview");
 
 function openImagePreview(src, name) {
   const previewImage = document.getElementById("preview-image");
@@ -135,16 +124,22 @@ function openImagePreview(src, name) {
 
   document.getElementById("preview-title").textContent = name;
 
-  imagePreview.showModal();
+  imagePreview.hidden = false;
 }
 
 document.getElementById("close-preview").addEventListener("click", () => {
-  imagePreview.close();
+  imagePreview.hidden = true;
 });
 
 imagePreview.addEventListener("click", event => {
   if (event.target === imagePreview) {
-    imagePreview.close();
+    imagePreview.hidden = true;
+  }
+});
+
+document.addEventListener("keydown", event => {
+  if (event.key === "Escape") {
+    imagePreview.hidden = true;
   }
 });
 // Switch between website views
