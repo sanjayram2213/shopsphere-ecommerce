@@ -42,6 +42,49 @@ const products = [
     image: "https://images.unsplash.com/photo-1511499767150-a48a237f0083?auto=format&fit=crop&w=800&q=80",
     category: "Fashion"
   }
+  ,
+  {
+    id: 7,
+    name: "Power Bank",
+    price: 1199,
+    image: "https://images.unsplash.com/photo-1609592806596-b43bada2f2b4?auto=format&fit=crop&w=800&q=80",
+    category: "Electronics"
+  },
+  {
+    id: 8,
+    name: "Gaming Mouse",
+    price: 799,
+    image: "https://images.unsplash.com/photo-1527814050087-3793815479db?auto=format&fit=crop&w=800&q=80",
+    category: "Electronics"
+  },
+  {
+    id: 9,
+    name: "Laptop Stand",
+    price: 999,
+    image: "https://images.unsplash.com/photo-1527864550417-7fd91fc51a46?auto=format&fit=crop&w=800&q=80",
+    category: "Electronics"
+  },
+  {
+    id: 10,
+    name: "Casual Hoodie",
+    price: 1499,
+    image: "https://images.unsplash.com/photo-1556821840-3a63f95609a7?auto=format&fit=crop&w=800&q=80",
+    category: "Fashion"
+  },
+  {
+    id: 11,
+    name: "Leather Wallet",
+    price: 699,
+    image: "https://images.unsplash.com/photo-1627123424574-724758594e93?auto=format&fit=crop&w=800&q=80",
+    category: "Fashion"
+  },
+  {
+    id: 12,
+    name: "Travel Bag",
+    price: 1299,
+    image: "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=800&q=80",
+    category: "Fashion"
+  }
 ];
 
 // Load saved data
