@@ -1,3 +1,4 @@
+
 const products = [
   {
     id: 1,
@@ -43,15 +44,31 @@ const products = [
   }
 ];
 
-let cart = [];
-let wishlist = [];
+// Load saved data
+function loadSavedData(key) {
+  try {
+    const saved = JSON.parse(localStorage.getItem(key));
+    return Array.isArray(saved) ? saved : [];
+  } catch (error) {
+    return [];
+  }
+}
+
+// Save data
+function saveData(key, data) {
+  localStorage.setItem(key, JSON.stringify(data));
+}
+
+let cart = loadSavedData("shopsphere-cart");
+let wishlist = loadSavedData("shopsphere-wishlist");
+
 const productList = document.getElementById("product-list");
 const cartItems = document.getElementById("cart-items");
 const totalElement = document.getElementById("total");
 const cartCount = document.getElementById("cart-count");
 const wishlistItems = document.getElementById("wishlist-items");
-// Display products
 
+// Display products
 function displayProducts(items = products) {
   productList.innerHTML = "";
 
@@ -64,34 +81,26 @@ function displayProducts(items = products) {
     const card = document.createElement("div");
     card.className = "product-card";
 
-    
-card.innerHTML = `
-  <img src="${product.image}" alt="${product.name}">
-  <h3>${product.name}</h3>
-  <p>₹${product.price.toLocaleString("en-IN")}</p>
-
-  <button onclick="addToCart(${product.id})">
-    Add to Cart
-  </button>
-
-  <button onclick="addToWishlist(${product.id})">
-    ❤️ Wishlist
-  </button>
-`;
-
+    card.innerHTML = `
+      <img src="${product.image}" alt="${product.name}">
+      <h3>${product.name}</h3>
+      <p>₹${product.price.toLocaleString("en-IN")}</p>
+      <button onclick="addToCart(${product.id})">Add to Cart</button>
+      <button onclick="addToWishlist(${product.id})">❤️ Wishlist</button>
+    `;
 
     productList.appendChild(card);
   });
 }
 
-// Add product to wishlist
+// Add to wishlist
 function addToWishlist(id) {
   const product = products.find(item => item.id === id);
-
   const alreadyAdded = wishlist.some(item => item.id === id);
 
   if (!alreadyAdded && product) {
     wishlist.push(product);
+    saveData("shopsphere-wishlist", wishlist);
     displayWishlist();
     alert("Added to Wishlist!");
   } else {
@@ -114,9 +123,7 @@ function displayWishlist() {
     row.innerHTML = `
       <p>
         ${item.name} - ₹${item.price}
-        <button onclick="removeFromWishlist(${item.id})">
-          Remove
-        </button>
+        <button onclick="removeFromWishlist(${item.id})">Remove</button>
       </p>
     `;
 
@@ -127,9 +134,11 @@ function displayWishlist() {
 // Remove from wishlist
 function removeFromWishlist(id) {
   wishlist = wishlist.filter(item => item.id !== id);
+  saveData("shopsphere-wishlist", wishlist);
   displayWishlist();
 }
 
+// Search and filter
 function filterProducts() {
   const searchText = document
     .getElementById("search-input")
@@ -140,9 +149,7 @@ function filterProducts() {
     .value;
 
   const filteredProducts = products.filter(product => {
-    const matchesSearch =
-      product.name.toLowerCase().includes(searchText);
-
+    const matchesSearch = product.name.toLowerCase().includes(searchText);
     const matchesCategory =
       selectedCategory === "All" ||
       product.category === selectedCategory;
@@ -153,16 +160,13 @@ function filterProducts() {
   displayProducts(filteredProducts);
 }
 
-document
-  .getElementById("search-input")
+document.getElementById("search-input")
   .addEventListener("input", filterProducts);
 
-document
-  .getElementById("category-filter")
+document.getElementById("category-filter")
   .addEventListener("change", filterProducts);
 
-
-// Add product to cart
+// Add to cart
 function addToCart(id) {
   const existing = cart.find(item => item.id === id);
 
@@ -170,11 +174,9 @@ function addToCart(id) {
     existing.quantity++;
   } else {
     const product = products.find(item => item.id === id);
+    if (!product) return;
 
-    cart.push({
-      ...product,
-      quantity: 1
-    });
+    cart.push({ ...product, quantity: 1 });
   }
 
   updateCart();
@@ -183,7 +185,6 @@ function addToCart(id) {
 // Change quantity
 function changeQuantity(id, amount) {
   const item = cart.find(product => product.id === id);
-
   if (!item) return;
 
   item.quantity += amount;
@@ -195,7 +196,7 @@ function changeQuantity(id, amount) {
   updateCart();
 }
 
-// Update shopping cart
+// Update cart and save it
 function updateCart() {
   cartItems.innerHTML = "";
 
@@ -204,13 +205,14 @@ function updateCart() {
   }
 
   let total = 0;
+
   cartCount.textContent = cart.reduce(
-  (sum, item) => sum + item.quantity,
-  0
-);
+    (sum, item) => sum + item.quantity,
+    0
+  );
+
   cart.forEach(item => {
-    const itemTotal = item.price * item.quantity;
-    total += itemTotal;
+    total += item.price * item.quantity;
 
     const row = document.createElement("div");
 
@@ -229,6 +231,8 @@ function updateCart() {
 
   totalElement.textContent =
     "Total: ₹" + total.toLocaleString("en-IN");
+
+  saveData("shopsphere-cart", cart);
 }
 
 // Open checkout
@@ -269,7 +273,7 @@ function hideCheckout() {
   document.getElementById("checkout").hidden = true;
 }
 
-// Place demonstration order
+// Demo order
 function placeDemoOrder() {
   if (cart.length === 0) return;
 
@@ -281,8 +285,6 @@ function placeDemoOrder() {
   cart = [];
   updateCart();
 
-  displayWishlist();
-
   alert("Your ShopSphere demo order is successful!");
 
   document.getElementById("checkout").hidden = true;
@@ -292,3 +294,4 @@ function placeDemoOrder() {
 displayProducts();
 updateCart();
 displayWishlist();
+
